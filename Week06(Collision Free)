@@ -1,0 +1,36 @@
+#include <stdio.h>
+int main() {
+    int n, i;
+    int s[20];
+    char op;
+    printf("How many stations: ");
+    scanf("%d", &n);
+    do {
+        // Input status of stations
+        for(i = 0; i < n; i++) {
+            printf("Enter status of station %d: ", i + 1);
+            scanf("%d", &s[i]);
+        }
+        // Display ready stations
+        for(i = 0; i < n; i++) {
+            if(s[i] == 1) {
+                printf("Station %d is ready to transmit\n", i + 1);
+            }
+        }
+        printf("Repeat? Press Y: ");
+        scanf(" %c", &op);
+    } while(op == 'Y' || op == 'y');
+    return 0;
+}
+
+_________________________________
+output
+
+How many stations: 3
+
+Enter status of station 1: 1
+Enter status of station 2: 0
+Enter status of station 3: 1
+Station 1 is ready to transmit
+Station 3 is ready to transmit
+Repeat? Press Y:
