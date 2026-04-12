@@ -34,3 +34,12 @@ void main() {
 	}
     printf("%s", rem);
 }
+
+______________________________________________
+output
+
+Enter Data: 110001100011
+Enter Key: 1101
+
+Remainder is 011
+Final data is: 110001100011011
