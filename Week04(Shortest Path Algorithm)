@@ -1,48 +1,54 @@
 #include <stdio.h>
-#define infinity 9999
-#define MAX 20
-int minimum(int a,int b)
-{
-	if(a<=b)
-	  return a;
-	else
-	  return b;
+#define MAX 10
+#define INF 999
+int main() {
+    int n, i, j, start;
+    int cost[10][10], dist[10], visited[10] = {0};
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+    printf("Enter cost matrix:\n");
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n; j++) {
+            scanf("%d", &cost[i][j]);
+            if(cost[i][j] == 0)
+                cost[i][j] = INF;
+        }
+    printf("Enter starting node: ");
+    scanf("%d", &start);
+    for(i = 0; i < n; i++)
+        dist[i] = cost[start][i];
+    dist[start] = 0;
+    visited[start] = 1;
+    for(i = 0; i < n-1; i++) {
+        int min = INF, u;
+        for(j = 0; j < n; j++)
+            if(!visited[j] && dist[j] < min) {
+                min = dist[j];
+                u = j;
+            }
+        visited[u] = 1;
+        for(j = 0; j < n; j++)
+            if(!visited[j] && dist[j] > dist[u] + cost[u][j])
+                dist[j] = dist[u] + cost[u][j];
+    }
+    printf("\nShortest distances from node %d:\n", start);
+    for(i = 0; i < n; i++)
+        printf("To %d = %d\n", i, dist[i]);
+    return 0;
 }
-main()
-{
-	int i,j,k,n,start,end,adj[MAX][MAX],path[MAX][MAX];
-	printf("Enter number of vertices : ");
-	scanf("%d",&n);
-	printf("Enter weighted matrix :\n");
-	for(i=0;i<n;i++)
-	   for(j=0;j<n;j++)
-		scanf("%d",&adj[i][j]);
-       for(i=0;i<n;i++)
-	   for(j=0;j<n;j++)
-	   if(adj[i][j]==0)
-		path[i][j]=infinity;
-	   else
-		path[i][j]=adj[i][j];
-	for(k=0;k<n;k++)
-	{
-		for(i=0;i<n;i++)
-		  for(j=0;j<n;j++){
-            if(i==j)
-            path[i][j]=infinity;
-          else
-		    path[i][j]=minimum(path[i][j],path[i][k]+path[k][j]);
-	}
-	}
-	printf("Shortest path matrix is :\n");
-	for(i=0;i<n;i++)
-	{
-		for(j=0;j<n;j++)
-			printf("%6d",path[i][j]);
-		printf("\n");
-	}
-	printf("Enter start vertex :");
-	scanf("%d",&start);
-	printf("Enter end vertex :");
-	scanf("%d",&end);
-	printf("the min. cost between %d and %d is %d",start,end,path[start][end]);
-}
+
+____________________________________
+output
+
+Enter number of nodes: 4
+Enter cost matrix:
+0 2 0 6
+2 0 3 8
+0 3 0 0
+6 8 0 0
+Enter starting node: 0
+Shortest distances from node 0:
+To 0 = 0
+To 1 = 2
+To 2 = 5
+To 3 = 6
