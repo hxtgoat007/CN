@@ -6,12 +6,10 @@ int main() {
     printf("How many stations: ");
     scanf("%d", &n);
     do {
-        // Input status of stations
         for(i = 0; i < n; i++) {
             printf("Enter status of station %d: ", i + 1);
             scanf("%d", &s[i]);
         }
-        // Display ready stations
         for(i = 0; i < n; i++) {
             if(s[i] == 1) {
                 printf("Station %d is ready to transmit\n", i + 1);
