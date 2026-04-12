@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <string.h>
+
+void main() {
+    int i, j, keylen, msglen;
+    char input[100], key[30], temp[30], quot[100], rem[30], key1[30];
+    printf("Enter Data: ");
+    scanf("%s", input);
+    printf("Enter Key: ");
+    scanf("%s", key);
+    keylen = strlen(key);
+    msglen = strlen(input);
+    for(i = 0; i < keylen - 1; i++) {
+        input[msglen + i] = '0';
+	}
+    input[msglen + keylen - 1] = '\0';
+    strcpy(temp, input);
+    for(i = 0; i < msglen; i++) {
+        if(temp[i] == '1') {
+            for(j = 0; j < keylen; j++) {
+                temp[i + j] = (temp[i + j] == key[j]) ? '0' : '1';
+            }
+        }
+    }
+    for(i = 0; i < keylen - 1; i++) {
+        rem[i] = temp[msglen + i];
+	}
+    rem[keylen - 1] = '\0';
+    printf("\nRemainder is ");
+    printf("%s", rem);
+    printf("\nFinal data is: ");
+    for(i = 0; i < msglen; i++) {
+        printf("%c", input[i]);
+	}
+    printf("%s", rem);
+}
